@@ -1,76 +1,47 @@
-name: Deploy Portfolio
+name: Deploy Portfolio (без Docker Hub)
 
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:  # Разрешает ручной запуск из интерфейса GitHub
-
-env:
-  DOCKER_IMAGE: "abadikov42"
-  DOCKER_TAG: "latest"
+  workflow_dispatch:  # Возможность запуска вручную из интерфейса GitHub
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    ### 1. Получение кода
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    ### 2. Логин в Docker Hub
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Archive code as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: portfolio-source
+          path: .
 
-    ### 3. Сборка и отправка образа
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: true
-        tags: ${{ env.DOCKER_IMAGE }}/portfolio:${{ env.DOCKER_TAG }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: portfolio-source
+          path: ./portfolio-source
 
-    ### 4. Деплой на сервер через SSH
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd /opt/my-port
-          git pull origin main
-          docker-compose down
-          docker-compose up -d --build
-          echo "Деплой завершен!"
+      - name: Archive source and upload to server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Переходим в папку проекта
+            cd /opt/my-port || { echo "Папка не найдена"; exit 1; }
 
-    ### 5. Проверка доступности сайта
-    - name: Health Check
-      run: |
-        for i in {1..5}; do
-          if curl -sSf http://${{ secrets.SERVER_IP }} > /dev/null; then
-            echo "Сайт работает!"
-            exit 0
-          fi
-          sleep 5
-        done
-        echo "Ошибка: сайт не ответил после 5 попыток"
-        exit 1
+            # Получаем последние изменения
+            git pull origin main
 
-    ### 6. Уведомление в Telegram (опционально)
-    - name: Notify Telegram
-      if: success()
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_CHAT_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          ✅ Портфолио обновлено!
-          Репозиторий: ${{ github.repository }}
-          Коммит: ${{ github.sha }}
-          Ссылка: http://${{ secrets.SERVER_IP }}
+            # Останавливаем и удаляем старые контейнеры
+            docker-compose down
+
+            # Собираем и запускаем новые контейнеры
+            docker-compose up -d --build
+
+            echo "✅ Деплой завершен!"
