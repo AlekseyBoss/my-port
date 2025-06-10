@@ -1,8 +1,10 @@
 version: '3.8'
 services:
   portfolio:
+    image: AlekseyBoss/my-port:latest
     build: .
     container_name: my-portfolio
     ports:
       - "80:80"
     restart: unless-stopped
+#
