@@ -30,14 +30,7 @@ jobs:
         with:
           host: "83.172.43.115"
           username: "root"
-          key: "
-          -----BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQAAAJghx1V2IcdV
-dgAAAAtzc2gtZWQyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQ
-AAAEBPBVrdvI26G+hZ9+EFd6a532e8vostqJqqpY1ZXEbEjxgXZ7heOa+xnvqxMY+xVgUJ
-aaCKkrga3OZKKcU17a+FAAAAFGFiYWRpa292NDJAZ21haWwuY29tAQ==
------END OPENSSH PRIVATE KEY-----"
+          key: " b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQAAAJghx1V2IcdVdgAAAAtzc2gtZWQyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQAAAEBPBVrdvI26G+hZ9+EFd6a532e8vostqJqqpY1ZXEbEjxgXZ7heOa+xnvqxMY+xVgUJaaCKkrga3OZKKcU17a+FAAAAFGFiYWRpa292NDJAZ21haWwuY29tAQ== "
           script: |
             cd /opt/my-port || { echo "Папка не найдена"; exit 1; }
             git pull origin main
