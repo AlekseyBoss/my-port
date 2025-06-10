@@ -28,9 +28,10 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: 83.172.43.115
+          host: "83.172.43.115"
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
           script: |
             echo "Connected successfully!"
             cd /opt/my-port
