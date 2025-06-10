@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Разрешает ручной запуск из интерфейса GitHub
 
 env:
-  DOCKER_IMAGE: "abadikov42"  # Замените на ваш Docker Hub логин
+  DOCKER_IMAGE: "AlekseyBoss"  # Замените на ваш Docker Hub логин
   DOCKER_TAG: "latest"                       # Или используйте ${{ github.sha }}
 
 jobs:
