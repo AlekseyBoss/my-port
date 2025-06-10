@@ -3,7 +3,7 @@ name: Deploy Portfolio (без Docker Hub)
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:  # Возможность запуска вручную из интерфейса GitHub
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -13,14 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Archive code as artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: portfolio-source
           path: .
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: portfolio-source
           path: ./portfolio-source
@@ -32,16 +32,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Переходим в папку проекта
             cd /opt/my-port || { echo "Папка не найдена"; exit 1; }
-
-            # Получаем последние изменения
             git pull origin main
-
-            # Останавливаем и удаляем старые контейнеры
             docker-compose down
-
-            # Собираем и запускаем новые контейнеры
             docker-compose up -d --build
-
             echo "✅ Деплой завершен!"
