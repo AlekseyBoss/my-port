@@ -30,8 +30,7 @@ jobs:
         with:
           host: "83.172.43.115"
           username: "root"
-          key: " b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQAAAJghx1V2IcdVdgAAAAtzc2gtZWQyNTUxOQAAACAYF2e4XjmvsZ76sTGPsVYFCWmgipK4GtzmSinFNe2vhQAAAEBPBVrdvI26G+hZ9+EFd6a532e8vostqJqqpY1ZXEbEjxgXZ7heOa+xnvqxMY+xVgUJaaCKkrga3OZKKcU17a+FAAAAFGFiYWRpa292NDJAZ21haWwuY29tAQ== "
-          script: |
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
             cd /opt/my-port || { echo "Папка не найдена"; exit 1; }
             git pull origin main
             docker-compose down
