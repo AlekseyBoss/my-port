@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Разрешает ручной запуск из интерфейса GitHub
 
 env:
-  DOCKER_IMAGE: "AlekseyBoss"
+  DOCKER_IMAGE: "abadikov42"
   DOCKER_TAG: "latest"
 
 jobs:
