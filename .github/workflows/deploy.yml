@@ -1,0 +1,76 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:  # Разрешает ручной запуск из интерфейса GitHub
+
+env:
+  DOCKER_IMAGE: "yourdockerhub/my-portfolio"  # Замените на ваш Docker Hub логин
+  DOCKER_TAG: "latest"                       # Или используйте ${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    ### 1. Получение кода
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    ### 2. Логин в Docker Hub (если используете)
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    ### 3. Сборка и отправка образа
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    ### 4. Деплой на сервер через SSH
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /opt/my-port
+          docker-compose pull || true
+          docker-compose down
+          docker-compose up -d --build
+          echo "Деплой завершен!"
+
+    ### 5. Проверка доступности сайта
+    - name: Health Check
+      run: |
+        for i in {1..5}; do
+          if curl -sSf http://${{ secrets.SERVER_IP }} > /dev/null; then
+            echo "Сайт работает!"
+            exit 0
+          fi
+          sleep 5
+        done
+        echo "Ошибка: сайт не ответил после 5 попыток"
+        exit 1
+
+    ### 6. Уведомление в Telegram (опционально)
+    - name: Notify Telegram
+      if: success()
+      uses: appleboy/telegram-action@v1.0.0
+      with:
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ✅ Портфолио обновлено!
+          Репозиторий: ${{ github.repository }}
+          Коммит: ${{ github.sha }}
+          Ссылка: http://${{ secrets.SERVER_IP }}
