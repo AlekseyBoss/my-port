@@ -25,14 +25,15 @@ jobs:
           name: portfolio-source
           path: ./portfolio-source
 
-      - name: Archive source and upload to server via SSH
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: "83.172.43.115"
-          username: "root"
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-            cd /opt/my-port || { echo "Папка не найдена"; exit 1; }
+          script: |
+            echo "Connected successfully!"
+            cd /opt/my-port
             git pull origin main
             docker-compose down
             docker-compose up -d --build
-            echo "✅ Деплой завершен!"
