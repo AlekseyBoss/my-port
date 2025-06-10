@@ -6,12 +6,12 @@ on:
   workflow_dispatch:  # Разрешает ручной запуск из интерфейса GitHub
 
 env:
-  DOCKER_IMAGE: "yourdockerhub/my-portfolio"  # Замените на ваш Docker Hub логин
+  DOCKER_IMAGE: "AlekseyBoss/my-port"  # Замените на ваш Docker Hub логин
   DOCKER_TAG: "latest"                       # Или используйте ${{ github.sha }}
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: centos-latest
 
     steps:
     ### 1. Получение кода
