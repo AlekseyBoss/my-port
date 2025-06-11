@@ -44,9 +44,9 @@ jobs:
             git reset --hard origin/main
 
             # Пересобираем и запускаем контейнеры
-            docker-compose down
-            docker-compose pull || true
-            docker-compose build --no-cache
+            docker compose down
+            docker compose pull || true
+            docker compose build --no-cache
             docker-compose up -d
 
             echo "=== Deployment completed successfully ==="
