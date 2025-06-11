@@ -30,7 +30,7 @@ jobs:
         with:
           host: "83.172.43.115"
           username: ${{ secrets.SSH_USER }}
-          key: "-----BEGIN OPENSSH PRIVATE KEY-----b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACBSPscemH+VG1RdIiJC9116YmGV+niexr3MBnxulreMPgAAAJD6qu43+qruNwAAAAtzc2gtZWQyNTUxOQAAACBSPscemH+VG1RdIiJC9116YmGV+niexr3MBnxulreMPgAAAEDA2lAjv048dfDBbQX/Fc/XWHQ9aRKHPFFxLYAk+0OtRFI+xx6Yf5UbVF0iIkL3XXpiYZX6eJ7GvcwGfG6Wt4w+AAAADHJvb3RAYW5zaWJsZQE=-----END OPENSSH PRIVATE KEY-----"
+          key: ${{ secrets.SSH_PRIVATE_KEY}}
           port: 22
           script: |
             echo "Connected successfully!"
