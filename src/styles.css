@@ -209,3 +209,17 @@ body {
   font-size: 0.9rem;
   color: #657786;
 }
+
+/* === Секция "Обо мне" === */
+.about-section {
+  background: var(--card-bg);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.about-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
