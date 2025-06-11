@@ -1,27 +1,51 @@
-/* Общие стили */
+/* === Переменные для темной/светлой темы === */
+:root {
+  --bg-color: #f7f9f9;
+  --card-bg: white;
+  --text-color: #0f1419;
+  --link-color: #1da1f2;
+  --border-color: #e6ecf0;
+  --accent-color: #1d9bf0;
+}
+
+[data-theme="dark"] {
+  --bg-color: #15202b;
+  --card-bg: #192734;
+  --text-color: #e7e9ea;
+  --link-color: #1d9bf0;
+  --border-color: #38444d;
+  --accent-color: #1d9bf0;
+}
+
+/* === Базовые стили === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f7f9f9;
-  color: #0f1419;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.5;
 }
 
+/* === Контейнер для центрирования контента === */
 .container {
   max-width: 700px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Шапка профиля */
+/* === Шапка профиля === */
 .twitter-header {
-  background: white;
-  border-bottom: 1px solid #e6ecf0;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
 }
 
@@ -36,7 +60,7 @@ body {
   height: 80px;
   object-fit: cover;
   border-radius: 999px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
 }
 
 .profile-info .name {
@@ -57,7 +81,7 @@ body {
 .link {
   display: inline-block;
   margin-top: 0.5rem;
-  color: #1da1f2;
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -65,13 +89,22 @@ body {
   margin-right: 0.3rem;
 }
 
-/* Лента записей */
+.theme-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/* === Лента записей === */
 .feed {
-  background: white;
+  background: var(--card-bg);
   padding: 1rem;
   margin-top: 1rem;
   border-radius: 12px;
-  border: 1px solid #e6ecf0;
+  border: 1px solid var(--border-color);
 }
 
 .section-title {
@@ -85,20 +118,33 @@ body {
   resize: none;
   padding: 1rem;
   font-size: 1rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--border-color);
   border-radius: 1rem;
   min-height: 80px;
   margin-bottom: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+.new-post textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
 }
 
 .new-post button {
-  background: #1da1f2;
+  background: var(--accent-color);
   color: white;
   border: none;
   padding: 0.5rem 1.2rem;
   border-radius: 999px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.new-post button:hover {
+  background: #177cc0;
 }
 
 .post-list {
@@ -106,7 +152,7 @@ body {
 }
 
 .post-item {
-  border-bottom: 1px solid #e6ecf0;
+  border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
 }
 
@@ -114,7 +160,12 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Проекты */
+.post-item small {
+  color: #5b7083;
+  font-size: 0.85rem;
+}
+
+/* === Проекты === */
 .projects-section {
   margin-top: 1rem;
 }
@@ -125,10 +176,15 @@ body {
 }
 
 .project-card {
-  background: white;
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: 1rem;
-  border: 1px solid #e6ecf0;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
 }
 
 .project-card h3 {
@@ -139,13 +195,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #1da1f2;
+  color: var(--link-color);
   text-decoration: none;
   margin-top: 0.5rem;
   display: block;
 }
 
-/* Подвал */
+/* === Подвал === */
 .site-footer {
   margin-top: 2rem;
   padding: 2rem 0;

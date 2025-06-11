@@ -1,64 +1,4 @@
-/* Общие стили */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f7f9f9;
-  color: #0f1419;
-  line-height: 1.5;
-}
-
-.container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Шапка профиля */
-.twitter-header {
-  background: white;
-  border-bottom: 1px solid #e6ecf0;
-  padding: 1rem 0;
-}
-
-.profile-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.avatar {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 999px;
-  border: 1px solid #ccc;
-}
-
-.profile-info .name {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.profile-info .username {
-  color: #5b7083;
-  font-size: 0.9rem;
-}
-
-.bio {
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-}
-
-.link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #1da1f2;
-  text-decoration: none;
+;
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("post-form");
   const postText = document.getElementById("post-text");
@@ -93,4 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPosts();
     form.reset();
   });
+});
+
+// Переключение темы
+const themeToggle = document.getElementById('theme-toggle');
+
+// Проверяем сохранённую тему или используем светлую по умолчанию
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+// Меняем иконку при загрузке
+if (currentTheme === 'dark') {
+  themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
+
+themeToggle.addEventListener('click', () => {
+  let theme = document.documentElement.getAttribute('data-theme');
+  
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', 'dark');
+  }
 });
