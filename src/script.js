@@ -1,18 +1,36 @@
-// Переключение темы
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  if (currentTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("post-form");
+  const postText = document.getElementById("post-text");
+  const postList = document.getElementById("posts");
 
-// Загрузка сохранённой темы
-window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
+  // Загружаем посты из localStorage
+  let posts = JSON.parse(localStorage.getItem("userPosts")) || [];
+
+  function renderPosts() {
+    postList.innerHTML = "";
+    posts.forEach((post) => {
+      const div = document.createElement("div");
+      div.className = "post-item";
+      div.innerHTML = `<p>${post.text}</p><small>${post.date}</small>`;
+      postList.appendChild(div);
+    });
+  }
+
+  renderPosts();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = postText.value.trim();
+    if (!text) return;
+
+    const newPost = {
+      text,
+      date: new Date().toLocaleString(),
+    };
+
+    posts.unshift(newPost);
+    localStorage.setItem("userPosts", JSON.stringify(posts));
+    renderPosts();
+    form.reset();
+  });
 });

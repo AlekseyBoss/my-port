@@ -3,62 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Мое Портфолио | Иван Иванов</title>
+  <title>Иван Иванов • X</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container">
-      <h1>Иван Иванов</h1>
-      <p class="subtitle">Веб-разработчик</p>
-      <nav class="nav">
-        <a href="#about"><i class="fas fa-user-circle"></i> Обо мне</a> 
-        <a href="#projects"><i class="fas fa-briefcase"></i> Проекты</a>
-        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
-      </nav>
+  <header class="twitter-header">
+    <div class="profile-container">
+      <img src="images/photo.jpg" alt="Фото пользователя" class="avatar">
+      <div class="profile-info">
+        <h1 class="name">Иван Иванов</h1>
+        <p class="username">@ivan_dev</p>
+        <p class="bio">Веб-разработчик, пишу код и мысли.</p>
+        <a href="mailto:email@example.com" class="link"><i class="fas fa-envelope"></i> Написать мне</a>
+      </div>
     </div>
   </header>
 
-  <main class="main-content">
+  <main class="feed">
+    <h2 class="section-title">Мои записи</h2>
 
-    <section id="about" class="section glass about-section">
-  <div class="about-content">
-    <h2>Обо мне</h2>
-    <p>Привет! Я разработчик с опытом работы в области фронтенд и бэкенд разработки. Увлекаюсь созданием удобных и красивых интерфейсов.</p>
-  </div>
-  <div class="photo-wrapper">
-    <img src="images/gra.jpg" alt="Фото Ивана Иванова" class="profile-photo" />
-  </div>
-</section>
+    <!-- Форма для новых записей -->
+    <form id="post-form" class="new-post">
+      <textarea id="post-text" placeholder="Что у вас нового?" maxlength="280" required></textarea>
+      <button type="submit">Опубликовать</button>
+    </form>
 
-    <section id="projects" class="section">
-      <h2>Мои проекты</h2>
-
-      <div class="project-grid">
-        <article class="project-card">
-          <h3>Проект 1</h3>
-          <p>Описание проекта 1. Здесь может быть краткое описание задач, технологий и достижений.</p>
-          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть проект</a>
-        </article>
-
-        <article class="project-card">
-          <h3>Проект 2</h3>
-          <p>Описание проекта 2. Здесь может быть краткое описание задач, технологий и достижений.</p>
-          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть проект</a>
-        </article>
-      </div>
-    </section>
-
+    <!-- Лента записей -->
+    <div id="posts" class="post-list"></div>
   </main>
 
+  <section class="projects-section">
+    <h2 class="section-title">Проекты</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Проект 1</h3>
+        <p>Краткое описание проекта. Можно указать технологии и достижения.</p>
+        <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a> 
+      </div>
+      <div class="project-card">
+        <h3>Проект 2</h3>
+        <p>Ещё один интересный проект, над которым я работал.</p>
+        <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a>
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">
-    <p>Контакты: 
-      <a href="mailto:email@example.com"><i class="fas fa-envelope"></i> email@example.com</a>
-    </p>
+    <p>&copy; 2025 Иван Иванов. Все мысли свои.</p>
   </footer>
 
   <script src="script.js"></script>

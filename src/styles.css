@@ -1,16 +1,4 @@
-:root {
-  --bg-color: #ffffff;
-  --text-color: #1a1a1a;
-  --accent-color: #6c63ff;
-  --card-bg: rgba(255, 255, 255, 0.7);
-}
-
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #f1f1f1;
-  --card-bg: rgba(40, 40, 40, 0.7);
-}
-
+/* Общие стили */
 * {
   margin: 0;
   padding: 0;
@@ -19,138 +7,128 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  transition: background 0.3s, color 0.3s;
+  background-color: #f7f9f9;
+  color: #0f1419;
+  line-height: 1.5;
 }
 
 .container {
-  max-width: 960px;
+  max-width: 700px;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
-.site-header {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+.twitter-header {
+  background: white;
+  border-bottom: 1px solid #e6ecf0;
+  padding: 1rem;
 }
 
-.site-header h1 {
-  font-size: 2rem;
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
-.subtitle {
-  font-weight: 600;
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+}
+
+.profile-info .name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.profile-info .username {
+  color: #5b7083;
+  font-size: 0.9rem;
+}
+
+.bio {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #1da1f2;
+  text-decoration: none;
+}
+
+.link i {
+  margin-right: 0.3rem;
+}
+
+.feed {
+  background: white;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
   margin-bottom: 1rem;
 }
 
-.nav {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+.new-post textarea {
+  width: 100%;
+  resize: none;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 1rem;
+  min-height: 80px;
+  margin-bottom: 1rem;
 }
 
-.nav a {
-  text-decoration: none;
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#theme-toggle {
-  background: none;
+.new-post button {
+  background: #1da1f2;
+  color: white;
   border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--text-color);
+  font-weight: bold;
 }
 
-.section {
-  padding: 3rem 0;
+.post-list {
+  margin-top: 1rem;
 }
 
-.glass {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 0 1rem;
+.post-item {
+  border-bottom: 1px solid #e6ecf0;
+  padding: 1rem 0;
+}
+
+.post-item p {
+  margin-bottom: 0.5rem;
+}
+
+.projects-section {
+  padding: 1rem;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1rem;
 }
 
 .project-card {
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-card a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--accent-color);
-  text-decoration: none;
-  margin-top: 1rem;
-  display: block;
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #e6ecf0;
 }
 
 .site-footer {
   text-align: center;
-  padding: 2rem;
   font-size: 0.9rem;
-}
-
-/* Стили для секции "Обо мне" с фото */
-.about-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 3rem 0;
-}
-
-@media (min-width: 768px) {
-  .about-section {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.about-content {
-  flex: 1;
-}
-
-.photo-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-photo {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid var(--accent-color);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-}
-
-.profile-photo:hover {
-  transform: scale(1.05);
+  padding: 1rem;
+  color: #657786;
 }
