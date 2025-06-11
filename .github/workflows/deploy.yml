@@ -12,30 +12,44 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
         with:
-          name: portfolio-source
-          path: .
+          fetch-depth: 0  # Получаем всю историю коммитов
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      # Удаляем шаги с upload/download artifact - они не нужны для этого сценария
+      # Вместо этого используем прямой деплой через SSH
+
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.7.0
         with:
-          name: portfolio-source
-          path: ./portfolio-source
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Test SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no \
+              -i ${{ env.SSH_KEY_FILE }} \
+              ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "echo 'SSH connection successful!'"
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: "83.172.43.115"
+          host: ${{ secrets.SERVER_IP }}  # Используем secret вместо хардкода IP
           username: ${{ secrets.SSH_USER }}
-          #password: ${{ secrets.SSH_PASSWORD }}  # Добавьте пароль в Secrets
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          script_timeout: 15m
           script: |
-            echo "Connected successfully!"
-            cd /opt/my-port
-            git pull origin main
+            echo "=== Starting deployment ==="
+            cd /opt/my-port || exit 1
+            
+            # Обновляем репозиторий
+            git fetch origin
+            git reset --hard origin/main
+            
+            # Пересобираем и запускаем контейнеры
             docker-compose down
-            docker-compose up -d --build
+            docker-compose pull || true
+            docker-compose build --no-cache
+            docker-compose up -d
+            
+            echo "=== Deployment completed successfully ==="
+            docker ps
