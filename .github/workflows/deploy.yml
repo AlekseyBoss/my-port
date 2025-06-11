@@ -30,8 +30,8 @@ jobs:
         with:
           host: "83.172.43.115"
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}  # Добавьте пароль в Secrets
-          #key: ${{ secrets.SSH_PRIVATE_KEY}}
+          #password: ${{ secrets.SSH_PASSWORD }}  # Добавьте пароль в Secrets
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             echo "Connected successfully!"
