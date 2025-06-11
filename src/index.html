@@ -11,48 +11,54 @@
 <body>
 
   <header class="twitter-header">
-    <div class="profile-container">
-      <img src="images/photo.jpg" alt="Фото пользователя" class="avatar">
-      <div class="profile-info">
-        <h1 class="name">Иван Иванов</h1>
-        <p class="username">@ivan_dev</p>
-        <p class="bio">Веб-разработчик, пишу код и мысли.</p>
-        <a href="mailto:email@example.com" class="link"><i class="fas fa-envelope"></i> Написать мне</a>
+    <div class="container">
+      <div class="profile-container">
+        <img src="images/photo.jpg" alt="Фото пользователя" class="avatar">
+        <div class="profile-info">
+          <h1 class="name">Иван Иванов</h1>
+          <p class="username">@ivan_dev</p>
+          <p class="bio">Веб-разработчик, пишу код и мысли.</p>
+          <a href="mailto:email@example.com" class="link"><i class="fas fa-envelope"></i> Написать мне</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="feed">
-    <h2 class="section-title">Мои записи</h2>
+  <div class="container">
+    <main class="feed">
+      <h2 class="section-title">Мои записи</h2>
 
-    <!-- Форма для новых записей -->
-    <form id="post-form" class="new-post">
-      <textarea id="post-text" placeholder="Что у вас нового?" maxlength="280" required></textarea>
-      <button type="submit">Опубликовать</button>
-    </form>
+      <!-- Форма для новых записей -->
+      <form id="post-form" class="new-post">
+        <textarea id="post-text" placeholder="Что у вас нового?" maxlength="280" required></textarea>
+        <button type="submit">Опубликовать</button>
+      </form>
 
-    <!-- Лента записей -->
-    <div id="posts" class="post-list"></div>
-  </main>
+      <!-- Лента записей -->
+      <div id="posts" class="post-list"></div>
+    </main>
 
-  <section class="projects-section">
-    <h2 class="section-title">Проекты</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <h3>Проект 1</h3>
-        <p>Краткое описание проекта. Можно указать технологии и достижения.</p>
-        <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a> 
+    <section class="projects-section">
+      <h2 class="section-title">Проекты</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Проект 1</h3>
+          <p>Краткое описание проекта. Можно указать технологии и достижения.</p>
+          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a> 
+        </div>
+        <div class="project-card">
+          <h3>Проект 2</h3>
+          <p>Ещё один интересный проект, над которым я работал.</p>
+          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a>
+        </div>
       </div>
-      <div class="project-card">
-        <h3>Проект 2</h3>
-        <p>Ещё один интересный проект, над которым я работал.</p>
-        <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть</a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <footer class="site-footer">
-    <p>&copy; 2025 Иван Иванов. Все мысли свои.</p>
+    <div class="container">
+      <p>&copy; 2025 Иван Иванов. Все мысли свои.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
