@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Мое Портфолио | Иван Иванов</title>
-    <link rel="stylesheet" href="styles.css" />
-    <!-- Шрифт -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Мое Портфолио | Иван Иванов</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-    <header role="banner">
-        <h1>Иван Иванов</h1>
-        <p>Веб-разработчик</p>
-        <nav role="navigation" aria-label="Основная навигация">
-            <a href="#about">Обо мне</a> 
-            <a href="#projects">Проекты</a>
-        </nav>
-    </header>
+  <header class="site-header">
+    <div class="container">
+      <h1>Иван Иванов</h1>
+      <p class="subtitle">Веб-разработчик</p>
+      <nav class="nav">
+        <a href="#about"><i class="fas fa-user-circle"></i> Обо мне</a> 
+        <a href="#projects"><i class="fas fa-briefcase"></i> Проекты</a>
+        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+      </nav>
+    </div>
+  </header>
 
-    <main role="main">
+  <main class="main-content">
 
-        <section id="about" aria-labelledby="about-heading">
-            <h2 id="about-heading">Обо мне</h2>
-            <p>Привет! Я разработчик с опытом работы...</p>
-        </section>
+    <section id="about" class="section glass">
+      <h2>Обо мне</h2>
+      <p>Привет! Я разработчик с опытом работы в области фронтенд и бэкенд разработки. Увлекаюсь созданием удобных и красивых интерфейсов.</p>
+    </section>
 
-        <section id="projects" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">Мои проекты</h2>
+    <section id="projects" class="section">
+      <h2>Мои проекты</h2>
 
-            <article class="project" role="article" aria-labelledby="project1-title">
-                <h3 id="project1-title">Проект 1</h3>
-                <p>Описание проекта 1. Здесь может быть краткое описание задач, технологий и достижений.</p>
-                <a href="#">Посмотреть проект</a>
-            </article>
+      <div class="project-grid">
+        <article class="project-card">
+          <h3>Проект 1</h3>
+          <p>Описание проекта 1. Здесь может быть краткое описание задач, технологий и достижений.</p>
+          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть проект</a>
+        </article>
 
-            <article class="project" role="article" aria-labelledby="project2-title">
-                <h3 id="project2-title">Проект 2</h3>
-                <p>Описание проекта 2. Здесь может быть краткое описание задач, технологий и достижений.</p>
-                <a href="#">Посмотреть проект</a>
-            </article>
-        </section>
+        <article class="project-card">
+          <h3>Проект 2</h3>
+          <p>Описание проекта 2. Здесь может быть краткое описание задач, технологий и достижений.</p>
+          <a href="#"><i class="fas fa-external-link-alt"></i> Посмотреть проект</a>
+        </article>
+      </div>
+    </section>
 
-    </main>
+  </main>
 
-    <footer role="contentinfo">
-        <p>Контакты: <a href="mailto:email@example.com">email@example.com</a></p>
-    </footer>
+  <footer class="site-footer">
+    <p>Контакты: 
+      <a href="mailto:email@example.com"><i class="fas fa-envelope"></i> email@example.com</a>
+    </p>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
